@@ -107,4 +107,4 @@ app.get('/', (req, res) => res.send('Hello World!'))
 
 app.listen(3000, () => console.log('Example app listening on port 3000!'))
 
-setInteraval(() => console.log('Started'), 5000)
+setInterval(() => console.log('Started'), 5000)
