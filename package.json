@@ -1,0 +1,22 @@
+{
+  "name": "signal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/navikom/SignallingServer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/navikom/SignallingServer/issues"
+  },
+  "homepage": "https://github.com/navikom/SignallingServer#readme",
+  "dependencies": {
+    "websocket": "^1.0.25"
+  }
+}
