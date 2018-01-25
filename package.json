@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/navikom/SignallingServer#readme",
   "dependencies": {
+    "express": "^4.16.2",
     "websocket": "^1.0.25"
   }
 }
