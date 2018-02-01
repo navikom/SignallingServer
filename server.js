@@ -1,10 +1,19 @@
+const fs = require('fs');
+
+const options = {
+  cert: fs.readFileSync('./sslcert/fullchain.pem'),
+  key: fs.readFileSync('./sslcert/privkey.pem')
+};
+
 const express = require('express'),
   expressApp = express(),
   socketio = require('socket.io'),
-  http = require('http'),
-  server = http.createServer(expressApp),
+  https = require('https'),
+  fs = require('fs'),
+  server = https.createServer(options, expressApp),
   uuid = require('node-uuid'),
   rooms = {};
+
 
 const getKeys = function(object, value) {
   for(const key in object) {
@@ -46,7 +55,7 @@ const run = function (config) {
         const to = data.to;
         const currentRoom = data.room;
         if (rooms[currentRoom] && rooms[currentRoom][to]) {
-          //console.log('Redirecting message to', to, 'by', data.by);
+          console.log('Redirecting message to', to, 'by', data.by, 'type', data.type);
           rooms[currentRoom][to].emit('msg', data);
         } else {
           console.warn('Invalid user');
@@ -61,6 +70,10 @@ const run = function (config) {
         }
         const [currentRoom, id] = keys;
         delete rooms[currentRoom][id];
+        for(const key in rooms) {
+          console.log('room', key, Object.keys(rooms[key]).length);
+        }
+        console.log('disconnect', currentRoom, id)
         for(const userId in rooms[currentRoom]) {
           rooms[currentRoom][userId] && rooms[currentRoom][userId].emit('peer.disconnected', {id: id});
         }
